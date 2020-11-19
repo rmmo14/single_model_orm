@@ -11,6 +11,13 @@
     <h1>
         All the Users
     </h1>
+    <table>
+        <th>
+            {% for key in all_users %}
+            <tr>{{user.first_name}}</tr>
+            {% endfor %}
+        </th>
+    </table>
 
     <h2>Add a User</h2>
     <form action="/adduser">
