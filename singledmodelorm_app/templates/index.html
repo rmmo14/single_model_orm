@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User with Templates</title>
+    {% load static %}
 </head>
 
 <body>
@@ -12,24 +13,38 @@
         All the Users
     </h1>
     <table>
-        <th>
-            {% for key in all_users %}
-            <tr>{{user.first_name}}</tr>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Age</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in all_users %}
+            <tr>
+                <td>{{user.id}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.age}}</td>
+            </tr>
             {% endfor %}
-        </th>
+        </tbody>
     </table>
 
     <h2>Add a User</h2>
-    <form action="/adduser">
-        <label for="firstname">First Name:</label>
-        <input type="text" name="first_name" id="first_name">
-        <label for="lastname">Last Name:</label>
-        <input type="text" name="last_name" id="last_name">
+    <form action="/adduser" method="POST">
+        {% csrf_token %}
+        <label for="first_name">First Name:</label>
+        <input type="text" name="first_name" class="entry">
+        <label for="last_name">Last Name:</label>
+        <input type="text" name="last_name" class="entry">
         <label for="email">Email:</label>
-        <input type="text" name="email_address" id="email_address">
+        <input type="email" name="email" class="entry">
         <label for="age">Age:</label>
-        <input type="number" name="age" value="age">
-        <input type="submit" name="add" value="Add">
+        <input type="number" name="age" class="entry">
+        <button>Submit</button>
     </form>
 </body>
 
